@@ -39,7 +39,8 @@ These are the primary tools and utilities used during the assessment of this mac
 ## 🎯 3. Exploitation
 
 ### 🔸 EternalBlue (MS17-010)
-- Vulnerability confirmed  
+- Vulnerability confirmed
+  ![Confirmed](../Images/01-Blue/vulnConfirmed.png)
 - Use a modern exploit module or manual approach  
 - flag2.txt is in the sam location    
 
