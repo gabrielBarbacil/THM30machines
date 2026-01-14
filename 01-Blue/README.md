@@ -39,6 +39,7 @@ These are the primary tools and utilities used during the assessment of this mac
   ![ms17-010](../Images/01-Blue/ms17_010.png)
 
 - Setting payload to use
+
 ![setPayload](../Images/01-Blue/setPayload.png)
 
 - Setting options:
@@ -64,6 +65,7 @@ Migrate to this process
 ```migrate $ID```
 
 - Use of hashdump
+  
 ![hashdump](../Images/01-Blue/hashdump.png)
 
 To obtain Jon’s password, I used CrackStation, but it’s also possible to do it with JohnTheRipper or Hashcat.
@@ -78,6 +80,7 @@ To obtain Jon’s password, I used CrackStation, but it’s also possible to do 
 ![flag2.txt](../Images/01-Blue/flag2.txt.png)
   
 - Logged in as Jon, the flag3.txt file is located in C:\Users\Jon\Documents
+
 ![flag2.txt](../Images/01-Blue/flag3.txt.png)   
 
 ---
