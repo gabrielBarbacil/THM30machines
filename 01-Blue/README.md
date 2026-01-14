@@ -10,7 +10,7 @@ The objective is to identify the SMB vulnerability, exploit it to gain a shell, 
 
 ### 🔸 Nmap Scan
 
-nmap -sCV -n -Pn -p- -oN scan.nmap <TARGET_IP>
+```nmap -sCV -n -Pn -p- -oN scan.nmap <TARGET_IP>```
 
 ---
 
