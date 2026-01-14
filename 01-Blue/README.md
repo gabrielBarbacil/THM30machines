@@ -86,16 +86,15 @@ To obtain Jon’s password, I used CrackStation, but it’s also possible to do 
 ---
 
 ## 🛡️ 6. Defensive Takeaways
-- Disable SMBv1  
-- Apply MS17-010 patch  
-- Monitor anomalous SMB traffic  
-- Harden legacy Windows systems  
+- Unpatched SMB vulnerabilities such as MS17‑010 remain one of the most critical attack vectors, and systems exposed to the network without updates are at immediate risk of remote code execution.  
+- SMBv1 should be fully disabled across the environment, as it is outdated, insecure, and unnecessary for modern Windows deployments.  
+- Network segmentation and strict access control on SMB shares significantly reduce the blast radius of exploitation attempts and lateral movement.  
 
 ---
 
 ## 🧠 7. Lessons Learned
-- Importance of patch management  
-- EternalBlue exploitation workflow  
-- SMB enumeration methodology  
-- Windows post-exploitation basics  
+- A single missing patch can lead to full system compromise, demonstrating the importance of continuous vulnerability management.  
+- Metasploit’s automation simplifies exploitation, but understanding the underlying vulnerability (EternalBlue) is essential for real‑world scenarios.  
+- Post‑exploitation enumeration is crucial, as gaining a shell is only the beginning; validating privileges, persistence options, and credential access defines the actual impact.  
+- Legacy protocols and services dramatically increase attack surface, reinforcing the need to audit and deprecate outdated components in Windows environments. 
  
