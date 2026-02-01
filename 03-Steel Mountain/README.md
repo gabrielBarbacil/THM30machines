@@ -13,13 +13,13 @@ Steel Mountain is a Windows-based machine focused on web enumeration, exposed cr
 
 
 ### 🔸 Key Findings
--  CVE‑2014‑6287 is a critical vulnerability in Rejetto HFS 2.3.x that enables remote command execution due to improper handling of a %00 sequence in the findMacroMarker function, allowing attackers to inject and execute arbitrary code.
+-  CVE‑2014‑6287 Rejetto HFS RCE vulnerability allowing remote command execution via improper macro handling.
 
 ---
 
 ## 🛠️ Tools Used
 - **Nmap** — Network scanning   
-- **Metasploit Framework** — Initial Access and PrivEsc    
+- **Metasploit Framework** — Initial Access    
 - **Netcat** — Shell handling   
 
 ---
@@ -42,7 +42,9 @@ We are Bill
 The author provides us with the PowerUp.ps1 file needed for the escalation. We upload it and then switch to a PowerShell session using ```load powershell``` and ```powershell_shell``` 
 ![powerUP](../Images/03-SteelMountain/powerUP.png)
 
-The service we are interested in is AdvancedSystemCareService9.
+The service we are interested in is `AdvancedSystemCareService9`.
+
+![getService](../Images/03-SteelMountain/getService.png)
 
 Author’s comment: The CanRestart option being true, allows us to restart a service on the system, 
 the directory to the application is also write-able. This means we can replace the legitimate application with 
@@ -56,7 +58,7 @@ Now we need to create a reverse shell with msfvenom and upload it:
 
 It’s important to upload it from the Meterpreter session; otherwise, it throws an error because we’re trying to replace the file of a running service. 
 
-Once uploaded, we return to our PowerShell session and run ```sc stop $service```
+Once uploaded, we return to our PowerShell session and run ```sc stop AdvancedSystemCareService9```
 
 ![stopService](../Images/03-SteelMountain/stopService.png)
 
